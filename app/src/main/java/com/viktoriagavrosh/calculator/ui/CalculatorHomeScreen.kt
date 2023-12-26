@@ -13,12 +13,14 @@ import com.viktoriagavrosh.calculator.model.CalculateButton
 import com.viktoriagavrosh.calculator.ui.elements.ButtonPanel
 import com.viktoriagavrosh.calculator.ui.elements.CountingField
 import com.viktoriagavrosh.calculator.ui.theme.CalculatorTheme
+import com.viktoriagavrosh.calculator.ui.utils.CalculateScreenType
 import com.viktoriagavrosh.calculator.viewmodel.CalculateUiState
 import com.viktoriagavrosh.calculator.viewmodel.CalculateViewModel
 
 @Composable
 fun CalculatorHomeScreen(
     listAllButtons: List<List<CalculateButton>>,
+    screenType: CalculateScreenType,
     viewModel: CalculateViewModel,
     uiState: CalculateUiState,
     modifier: Modifier = Modifier
@@ -33,6 +35,7 @@ fun CalculatorHomeScreen(
         Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_large)))
         ButtonPanel(
             listAllButtons = listAllButtons,
+            screenType = screenType,
             viewModel = viewModel,
             modifier = Modifier.weight(2F)
         )
@@ -44,7 +47,8 @@ fun CalculatorHomeScreen(
 fun CalculatorHomeScreenPreview() {
     CalculatorTheme {
         CalculatorHomeScreen(
-            listAllButtons = DataSource.listButtons,
+            listAllButtons = DataSource.getHorizontalListButton(),
+            screenType = CalculateScreenType.HORIZONTAL,
             viewModel = CalculateViewModel(),
             uiState = CalculateUiState()
         )

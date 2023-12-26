@@ -5,4 +5,5 @@
     <dimen name="padding_large">12dp</dimen>
 
     <dimen name="counting_field_height">120dp</dimen>
+    <dimen name="button_corner">32dp</dimen>
 </resources>
