@@ -1,6 +1,5 @@
 package com.viktoriagavrosh.calculator.ui.elements
 
-import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -88,7 +87,6 @@ private fun ButtonRow(
                             text = text,
                             buttonType = button.type
                         )
-                        Log.e("ButtonWrongInput", text)
                     } catch (e: IllegalArgumentException) {
                         displayToast()
                     }
