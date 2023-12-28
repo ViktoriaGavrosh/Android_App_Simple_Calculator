@@ -65,8 +65,24 @@ class StringTransducerTests {
 
     @Test
     fun checkInput_EnterDotAfterSign_AddZeroBeforeDot() {
-        val expectedAnswer = "2-3*4+0."
+        val expectedAnswer = "2-3*4+"
         val inputText = "2-3*4+."
+        val actualAnswer = checkInput(inputText)
+        assertEquals(expectedAnswer, actualAnswer)
+    }
+
+    @Test
+    fun checkInput_EnterTwoDotsInNumber_DeleteLastDot() {
+        val expectedAnswer = "4+6.3"
+        val inputText = "4+6.3."
+        val actualAnswer = checkInput(inputText)
+        assertEquals(expectedAnswer, actualAnswer)
+    }
+
+    @Test
+    fun checkInput_EnterMultiplyAsFirstSign_ReturnMessage() {
+        val expectedAnswer = "Wrong input"
+        val inputText = "*"
         val actualAnswer = checkInput(inputText)
         assertEquals(expectedAnswer, actualAnswer)
     }

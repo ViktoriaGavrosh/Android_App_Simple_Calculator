@@ -34,7 +34,7 @@ class CalculateViewModelTests {
     fun calculateViewModel_FirstEnterString_UiStateUpdated() {
         val inputText = "3"
         val buttonType = CalculateButtonType.PRINT
-        viewModel.getFunctionOnButtonClick(inputText, buttonType)
+        viewModel.getFunctionOnButtonClickOrException(inputText, buttonType)
         val currentCalculateUiState = viewModel.uiState.value
         assertEquals(inputText, currentCalculateUiState.textOnCountingField)
         assertFalse(currentCalculateUiState.isFirstInput)
@@ -45,9 +45,9 @@ class CalculateViewModelTests {
         val expectedText = "3+"
         val firstInputText = "3"
         val buttonType = CalculateButtonType.PRINT
-        viewModel.getFunctionOnButtonClick(firstInputText, buttonType)
+        viewModel.getFunctionOnButtonClickOrException(firstInputText, buttonType)
         val secondInputText = "+"
-        viewModel.getFunctionOnButtonClick(secondInputText, buttonType)
+        viewModel.getFunctionOnButtonClickOrException(secondInputText, buttonType)
         val currentCalculateUiState = viewModel.uiState.value
         assertEquals(expectedText, currentCalculateUiState.textOnCountingField)
     }
@@ -58,10 +58,10 @@ class CalculateViewModelTests {
         val firstInput = "3"
         val secondInput = "+"
         val thirdInput = "5"
-        viewModel.getFunctionOnButtonClick(firstInput, CalculateButtonType.PRINT)
-        viewModel.getFunctionOnButtonClick(secondInput, CalculateButtonType.PRINT)
-        viewModel.getFunctionOnButtonClick(thirdInput, CalculateButtonType.PRINT)
-        viewModel.getFunctionOnButtonClick("", CalculateButtonType.EQUAL)
+        viewModel.getFunctionOnButtonClickOrException(firstInput, CalculateButtonType.PRINT)
+        viewModel.getFunctionOnButtonClickOrException(secondInput, CalculateButtonType.PRINT)
+        viewModel.getFunctionOnButtonClickOrException(thirdInput, CalculateButtonType.PRINT)
+        viewModel.getFunctionOnButtonClickOrException("", CalculateButtonType.EQUAL)
         val currentCalculateUiState = viewModel.uiState.value
         assertEquals(expectedText, currentCalculateUiState.textOnCountingField)
     }
@@ -74,10 +74,10 @@ class CalculateViewModelTests {
         val firstInput = "3"
         val secondInput = "+"
         val thirdInput = "5"
-        viewModel.getFunctionOnButtonClick(firstInput, CalculateButtonType.PRINT)
-        viewModel.getFunctionOnButtonClick(secondInput, CalculateButtonType.PRINT)
-        viewModel.getFunctionOnButtonClick(thirdInput, CalculateButtonType.PRINT)
-        viewModel.getFunctionOnButtonClick("", CalculateButtonType.CLEAR)
+        viewModel.getFunctionOnButtonClickOrException(firstInput, CalculateButtonType.PRINT)
+        viewModel.getFunctionOnButtonClickOrException(secondInput, CalculateButtonType.PRINT)
+        viewModel.getFunctionOnButtonClickOrException(thirdInput, CalculateButtonType.PRINT)
+        viewModel.getFunctionOnButtonClickOrException("", CalculateButtonType.CLEAR)
         val currentCalculateUiState = viewModel.uiState.value
         assertEquals(expectedText, currentCalculateUiState.textOnCountingField)
     }

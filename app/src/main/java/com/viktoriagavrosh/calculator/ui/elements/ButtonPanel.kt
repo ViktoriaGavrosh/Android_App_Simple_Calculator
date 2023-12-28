@@ -1,5 +1,7 @@
 package com.viktoriagavrosh.calculator.ui.elements
 
+import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -13,6 +15,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -64,6 +67,12 @@ private fun ButtonRow(
     viewModel: CalculateViewModel,
     modifier: Modifier = Modifier
 ) {
+    val context = LocalContext.current
+    val textToast = stringResource(id = R.string.invalid_input_format)
+    val displayToast = {
+        Toast.makeText(context, textToast, Toast.LENGTH_SHORT).show()
+    }
+
     Row(
         modifier = modifier,
         horizontalArrangement = Arrangement.spacedBy(
@@ -74,10 +83,15 @@ private fun ButtonRow(
             val text = stringResource(id = button.textId)
             ElevatedButton(
                 onClick = {
-                    viewModel.getFunctionOnButtonClick(
-                        text = text,
-                        buttonType = button.type
-                    )
+                    try {
+                        viewModel.getFunctionOnButtonClickOrException(
+                            text = text,
+                            buttonType = button.type
+                        )
+                        Log.e("ButtonWrongInput", text)
+                    } catch (e: IllegalArgumentException) {
+                        displayToast()
+                    }
                 },
                 modifier = Modifier
                     .fillMaxSize()
@@ -108,3 +122,4 @@ fun ButtonPanelPreview() {
         )
     }
 }
+

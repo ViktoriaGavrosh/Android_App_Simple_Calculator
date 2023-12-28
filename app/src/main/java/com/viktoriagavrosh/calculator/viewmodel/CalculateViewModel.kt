@@ -29,12 +29,22 @@ class CalculateViewModel : ViewModel() {
         }
     }
 
-    fun getFunctionOnButtonClick(text: String, buttonType: CalculateButtonType) =
+    fun getFunctionOnButtonClickOrException(text: String, buttonType: CalculateButtonType) =
         when (buttonType) {
             CalculateButtonType.PRINT -> print(text)
             CalculateButtonType.EQUAL -> calculate()
             CalculateButtonType.CLEAR -> back()
+
         }
+
+    fun updateState() {
+        _uiState.update {
+            it.copy(
+                textOnCountingField = START_VALUE_ON_COUNTING_SCREEN,
+                isFirstInput = true
+            )
+        }
+    }
 
     private fun print(input: String) {
         val text = if (_uiState.value.isFirstInput) {
@@ -42,12 +52,23 @@ class CalculateViewModel : ViewModel() {
         } else {
             "${_uiState.value.textOnCountingField}$input"
         }
-        val newText = checkInput(text)
-        _uiState.update {
-            it.copy(
-                textOnCountingField = newText,
-                isFirstInput = false
-            )
+        when (val newText = checkInput(text)) {
+            "Wrong input" -> {
+                _uiState.update {
+                    it.copy(
+                        textOnCountingField = START_VALUE_ON_COUNTING_SCREEN
+                    )
+                }
+                throw IllegalArgumentException("Wrong input")
+            }
+            else -> {
+                _uiState.update {
+                    it.copy(
+                        textOnCountingField = newText,
+                        isFirstInput = false
+                    )
+                }
+            }
         }
     }
 
@@ -62,13 +83,14 @@ class CalculateViewModel : ViewModel() {
 
     private fun back() {
         val newText = deleteLastCharacter(_uiState.value.textOnCountingField)
-        _uiState.update {
-            it.copy(
-                textOnCountingField = newText
-            )
+        if (newText.isEmpty()) {
+            updateState()
+        } else {
+            _uiState.update {
+                it.copy(
+                    textOnCountingField = newText
+                )
+            }
         }
     }
-
-
-
 }

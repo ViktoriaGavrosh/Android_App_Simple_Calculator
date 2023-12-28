@@ -19,4 +19,6 @@
     <string name="equal">=</string>
     <string name="dot">.</string>
     <string name="clear">\u2190</string>
+
+    <string name="invalid_input_format">Invalid input format</string>
 </resources>
