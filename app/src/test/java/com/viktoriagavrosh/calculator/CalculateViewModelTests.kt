@@ -66,7 +66,29 @@ class CalculateViewModelTests {
         assertEquals(expectedText, currentCalculateUiState.textOnCountingField)
     }
 
-    // TODO CalculateWithDivideByZero
+    @Test
+    fun calculateViewModel_EnterDigitAfterCount_TextOnCountingFieldUpdate() {
+        val expectedText = "3"
+        viewModel.getFunctionOnButtonClickOrException("4", CalculateButtonType.PRINT)
+        viewModel.getFunctionOnButtonClickOrException("+", CalculateButtonType.PRINT)
+        viewModel.getFunctionOnButtonClickOrException("1", CalculateButtonType.PRINT)
+        viewModel.getFunctionOnButtonClickOrException("", CalculateButtonType.EQUAL)
+        viewModel.getFunctionOnButtonClickOrException("3", CalculateButtonType.PRINT)
+        val currentCalculateUiState = viewModel.uiState.value
+        assertEquals(expectedText, currentCalculateUiState.textOnCountingField)
+    }
+
+    @Test
+    fun calculateViewModel_EnterSignAfterCount_KeepTextOnCountingField() {
+        val expectedText = "5+"
+        viewModel.getFunctionOnButtonClickOrException("4", CalculateButtonType.PRINT)
+        viewModel.getFunctionOnButtonClickOrException("+", CalculateButtonType.PRINT)
+        viewModel.getFunctionOnButtonClickOrException("1", CalculateButtonType.PRINT)
+        viewModel.getFunctionOnButtonClickOrException("", CalculateButtonType.EQUAL)
+        viewModel.getFunctionOnButtonClickOrException("+", CalculateButtonType.PRINT)
+        val currentCalculateUiState = viewModel.uiState.value
+        assertEquals(expectedText, currentCalculateUiState.textOnCountingField)
+    }
 
     @Test
     fun calculateViewModel_ClickBackButton_UiStateUpdated() {

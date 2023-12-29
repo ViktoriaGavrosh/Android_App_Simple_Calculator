@@ -81,26 +81,26 @@ object DataSource {
     )
 
     fun getVerticalListButtons(): List<List<CalculateButton>> {
-        val newListButtons = DataSource.listNumbersButtons.toMutableList()
-        newListButtons.add(3, DataSource.listSignsButtons[0])
-        newListButtons.add(7, DataSource.listSignsButtons[1])
-        newListButtons.add(11, DataSource.listSignsButtons[2])
-        newListButtons.add(12, DataSource.listSignsButtons[3])
-        newListButtons.add(14, DataSource.listSignsButtons[4])
-        newListButtons.add(15, DataSource.listSignsButtons[5])
-        newListButtons.add(16, DataSource.listSignsButtons[6])
+        val newListButtons = listNumbersButtons.toMutableList()
+        newListButtons.add(3, listSignsButtons[0])
+        newListButtons.add(7, listSignsButtons[1])
+        newListButtons.add(11, listSignsButtons[2])
+        newListButtons.add(12, listSignsButtons[3])
+        newListButtons.add(14, listSignsButtons[4])
+        newListButtons.add(15, listSignsButtons[5])
+        newListButtons.add(16, listSignsButtons[6])
         return newListButtons.chunked(4)
     }
 
     fun getHorizontalListButton(): List<List<CalculateButton>> {
-        val newListButtons = DataSource.listNumbersButtons.toMutableList()
-        newListButtons.add(5, DataSource.listSignsButtons[3])
-        newListButtons.add(11, DataSource.listSignsButtons[4])
-        newListButtons.add(12, DataSource.listSignsButtons[0])
-        newListButtons.add(13, DataSource.listSignsButtons[1])
-        newListButtons.add(14, DataSource.listSignsButtons[2])
-        newListButtons.add(15, DataSource.listSignsButtons[5])
-        newListButtons.add(16, DataSource.listSignsButtons[6])
+        val newListButtons = listNumbersButtons.toMutableList()
+        newListButtons.add(5, listSignsButtons[3])
+        newListButtons.add(11, listSignsButtons[4])
+        newListButtons.add(12, listSignsButtons[0])
+        newListButtons.add(13, listSignsButtons[1])
+        newListButtons.add(14, listSignsButtons[2])
+        newListButtons.add(15, listSignsButtons[5])
+        newListButtons.add(16, listSignsButtons[6])
         return newListButtons.chunked(6)
     }
 }

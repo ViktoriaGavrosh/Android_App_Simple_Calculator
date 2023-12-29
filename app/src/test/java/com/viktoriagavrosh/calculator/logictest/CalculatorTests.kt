@@ -72,7 +72,7 @@ class CalculatorTests {
 
     @Test
     fun calculator_ConvertToList() {
-        val expectAnswer = listOf("36", "+", "64.1","-", "12", "*", "1.3", "/", "2")
+        val expectAnswer = listOf("36", "+", "64.1", "-", "12", "*", "1.3", "/", "2")
         val enteredString = "36+64.1-12*1.3/2"
         val actualAnswer = convertToList(enteredString)
         assertEquals(expectAnswer, actualAnswer)

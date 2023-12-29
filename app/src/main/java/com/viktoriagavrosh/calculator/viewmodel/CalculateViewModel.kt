@@ -1,6 +1,5 @@
 package com.viktoriagavrosh.calculator.viewmodel
 
-import androidx.core.text.isDigitsOnly
 import androidx.lifecycle.ViewModel
 import com.viktoriagavrosh.calculator.data.DataSource.getHorizontalListButton
 import com.viktoriagavrosh.calculator.data.DataSource.getVerticalListButtons
@@ -49,7 +48,13 @@ class CalculateViewModel : ViewModel() {
 
     private fun print(input: String) {
         val text = if (_uiState.value.isFirstInput) {
-            input
+            if (_uiState.value.textOnCountingField == "0"
+                || input.last().isDigit()
+            ) {
+                input
+            } else {
+                "${_uiState.value.textOnCountingField}$input"
+            }
         } else {
             "${_uiState.value.textOnCountingField}$input"
         }
@@ -62,6 +67,7 @@ class CalculateViewModel : ViewModel() {
                 }
                 throw IllegalArgumentException("Wrong input")
             }
+
             else -> {
                 _uiState.update {
                     it.copy(
