@@ -7,6 +7,8 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
@@ -40,6 +42,7 @@ fun CountingField(
                     .fillMaxWidth()
                     .height(dimensionResource(id = R.dimen.counting_field_height))
                     .padding(dimensionResource(id = R.dimen.padding_large))
+                    .verticalScroll(rememberScrollState())
                     .background(MaterialTheme.colorScheme.onPrimary),
                 contentAlignment = Alignment.BottomEnd
             ) {
@@ -47,8 +50,8 @@ fun CountingField(
                     text = uiState.textOnCountingField,
                     style = MaterialTheme.typography.titleLarge,
                     textAlign = TextAlign.End,
-                    modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_small)),
-                    maxLines = 2
+                    modifier = Modifier
+                        .padding(dimensionResource(id = R.dimen.padding_small))
                 )
             }
         }

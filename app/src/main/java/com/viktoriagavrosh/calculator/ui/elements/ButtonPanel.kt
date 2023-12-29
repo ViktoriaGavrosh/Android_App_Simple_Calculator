@@ -24,6 +24,7 @@ import com.viktoriagavrosh.calculator.model.CalculateButton
 import com.viktoriagavrosh.calculator.model.CalculateButtonType
 import com.viktoriagavrosh.calculator.ui.theme.CalculatorTheme
 import com.viktoriagavrosh.calculator.ui.utils.CalculateScreenType
+import com.viktoriagavrosh.calculator.ui.utils.bounceClick
 import com.viktoriagavrosh.calculator.viewmodel.CalculateViewModel
 
 @Composable
@@ -67,9 +68,8 @@ private fun ButtonRow(
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
-    val textToast = stringResource(id = R.string.invalid_input_format)
-    val displayToast = {
-        Toast.makeText(context, textToast, Toast.LENGTH_SHORT).show()
+    val displayToast = { text: String ->
+        Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
     }
 
     Row(
@@ -80,6 +80,7 @@ private fun ButtonRow(
     ) {
         for (button in listButtons) {
             val text = stringResource(id = button.textId)
+            val toastText = stringResource(id = button.exceptionMessageId)
             ElevatedButton(
                 onClick = {
                     try {
@@ -88,7 +89,7 @@ private fun ButtonRow(
                             buttonType = button.type
                         )
                     } catch (e: IllegalArgumentException) {
-                        displayToast()
+                        displayToast(toastText)
                     }
                 },
                 modifier = Modifier
@@ -97,7 +98,8 @@ private fun ButtonRow(
                         if (button.type == CalculateButtonType.EQUAL
                             && screenType == CalculateScreenType.HORIZONTAL
                         ) 2F else 1F
-                    ),
+                    )
+                    .bounceClick(),
                 shape = RoundedCornerShape(dimensionResource(id = R.dimen.button_corner))
             ) {
                 Text(

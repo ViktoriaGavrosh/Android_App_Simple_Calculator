@@ -75,7 +75,8 @@ object DataSource {
         ),
         CalculateButton(
             textId = R.string.equal,
-            type = CalculateButtonType.EQUAL
+            type = CalculateButtonType.EQUAL,
+            exceptionMessageId = R.string.divide_by_zero
         )
     )
 

@@ -1,5 +1,6 @@
 package com.viktoriagavrosh.calculator.viewmodel
 
+import androidx.core.text.isDigitsOnly
 import androidx.lifecycle.ViewModel
 import com.viktoriagavrosh.calculator.data.DataSource.getHorizontalListButton
 import com.viktoriagavrosh.calculator.data.DataSource.getVerticalListButtons
@@ -37,7 +38,7 @@ class CalculateViewModel : ViewModel() {
 
         }
 
-    fun updateState() {
+    private fun updateState() {
         _uiState.update {
             it.copy(
                 textOnCountingField = START_VALUE_ON_COUNTING_SCREEN,
@@ -76,7 +77,8 @@ class CalculateViewModel : ViewModel() {
         val result = calculateAll(_uiState.value.textOnCountingField)
         _uiState.update {
             it.copy(
-                textOnCountingField = result
+                textOnCountingField = result,
+                isFirstInput = true
             )
         }
     }

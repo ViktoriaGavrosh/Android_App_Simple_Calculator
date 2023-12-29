@@ -34,7 +34,7 @@ class CalculatorTests {
 
     @Test
     fun calculator_DivideInts() {
-        val expectAnswer = "3.0"       // TODO
+        val expectAnswer = "3"
         val enteredString = "9/3"
         val actualAnswer = calculateAll(enteredString)
         assertEquals(expectAnswer, actualAnswer)
@@ -42,7 +42,7 @@ class CalculatorTests {
 
     @Test
     fun calculator_DivideDoubles() {
-        val expectAnswer = "1.560655737704918"     // TODO
+        val expectAnswer = "1.560655737704918"
         val enteredString = "9.52/6.1"
         val actualAnswer = calculateAll(enteredString)
         assertEquals(expectAnswer, actualAnswer)
@@ -64,7 +64,7 @@ class CalculatorTests {
 
     @Test
     fun calculator_SignFirst() {
-        val expectAnswer = "-5.0"       // TODO
+        val expectAnswer = "-5"
         val enteredString = "-8+3"
         val actualAnswer = calculateAll(enteredString)
         assertEquals(expectAnswer, actualAnswer)

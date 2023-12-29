@@ -3,13 +3,23 @@ package com.viktoriagavrosh.calculator.model.logic
 fun calculateAll(expression: String): String {
     val listElements = convertToList(expression)
     val result = calculate(listElements)
-    return result
+    return formatResult(result)
 }
 
 private fun calculate(listElements: List<String>): String {
     val listFirstResult = calculateMultiplyAndDivide(listElements)
     val listSecondResult = calculateAddAndSubtract(listFirstResult)
     return listSecondResult.joinToString()
+}
+
+private fun formatResult(res: String): String {
+    val fractionalPart = res.substringAfter(".")
+    val fractionalPartWithoutZero = fractionalPart.replace("0", "")
+    return if (fractionalPartWithoutZero.isEmpty()) {
+        res.substringBefore(".")
+    } else {
+        res
+    }
 }
 
 private fun calculateMultiplyAndDivide(list: List<String>): List<String> {
